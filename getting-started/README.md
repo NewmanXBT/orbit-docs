@@ -6,6 +6,8 @@ Orbit is a prediction market protocol for YES/NO outcomes. Prices are interprete
 
 Orbit is designed around a simple constraint: liquidity should not come before belief. Before trading begins, liquidity providers commit capital together with explicit probability expectations. Those commitments form the market's opening state.
 
+Current implementation direction is Solana-native and built around Meteora DLMM for bin-based concentrated liquidity.
+
 ## Who Participates
 
 - Liquidity providers commit capital and an initial probability view during market initialization.

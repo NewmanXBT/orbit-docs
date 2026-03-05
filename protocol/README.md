@@ -4,6 +4,8 @@
 
 Orbit structures each market as a time-bounded binary event with on-chain settlement. The protocol separates market initialization, trading, liquidity adjustment, and resolution so that prices remain interpretable throughout the market lifecycle.
 
+The current implementation direction is Solana-native and uses Meteora DLMM as the AMM execution substrate.
+
 ![How Orbit works](../assets/images/figure-2-how-orbit-works.png)
 
 ## Core Components
@@ -39,6 +41,21 @@ As expiry approaches and uncertainty declines, Orbit reduces effective liquidity
 
 At expiry, the market is resolved based on an external oracle mechanism. Smart contracts settle the winning and losing outcome tokens on-chain.
 
+## Oracle and Dispute Flow
+
+Oracle resolution is the largest trust assumption in any prediction market. Orbit's default design target is an Optimistic Oracle pattern (UMA-style escalation game), with explicit challenge windows and bonds.
+
+Planned resolution flow:
+
+1. A proposer submits the outcome and posts a bond.
+2. A fixed challenge period opens.
+3. If unchallenged, the proposed outcome finalizes.
+4. If challenged, the dispute escalates to the oracle resolution process.
+5. Incorrect submissions are penalized through bond loss or slashing.
+6. If oracle resolution is delayed or unavailable, the market enters a fail-safe state with paused settlement until a governance-defined fallback path is executed.
+
+Alternative oracle paths such as Chainlink Functions remain possible for event types with highly structured API-verifiable outcomes.
+
 ## Order Types
 
 Orbit supports:
@@ -67,8 +84,25 @@ They are support tooling, not protocol authority.
 
 ### Liquidity Providers
 
-Liquidity providers contribute capital and a probability view during initialization. Their core risk is forecast error: if their initial belief is badly wrong, they may lose value over time despite earning fees.
+Liquidity providers contribute capital and a probability view during initialization. Their risk is a softened form of directional exposure: loss magnitude depends on divergence between stated probability and realized outcome. Time-aware decay can reduce terminal concentration, but it cannot eliminate losses under extreme divergence.
 
 ### Traders
 
 Traders enter and exit based on changing information. They use market prices as continuously updated probability signals and interact only with the AMM execution layer.
+
+## Adversarial Considerations in Initialization
+
+A capital-weighted opening price can be manipulated by large LP actors who submit distorted beliefs and trade against the induced opening state. Orbit treats this as a first-order design risk.
+
+Planned mitigation options:
+
+- commit-reveal for LP belief submissions before opening price computation
+- bounded contribution rules or outlier filters with explicit governance controls
+- nonlinear weighting (for example square-root capital weighting) to reduce concentration power
+
+Final mitigation design is pending implementation benchmarking and governance review.
+
+## Design References
+
+- [UMA documentation](https://docs.uma.xyz)
+- [Chainlink Functions documentation](https://docs.chain.link/chainlink-functions)

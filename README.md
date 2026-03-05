@@ -13,6 +13,7 @@ This documentation is organized for readers who want to understand how Orbit wor
 - [Technical Appendix](./protocol/technical-appendix.md): Implementation-oriented mechanics behind pricing, liquidity, and settlement.
 - [Economics](./economics/README.md): Fees, incentives, and the role of liquidity providers, traders, and referrers.
 - [Risks](./risks/README.md): Market, liquidity, oracle, smart contract, and legal risks.
+- [Team & Roadmap](./team-roadmap/README.md): Execution plan, milestones, and governance progression.
 
 ## What Makes Orbit Different
 
@@ -20,6 +21,7 @@ This documentation is organized for readers who want to understand how Orbit wor
 - Probability-native pricing: YES and NO tokens trade as probability expressions rather than generic asset pairs.
 - Time-aware liquidity adjustment: liquidity exposure is reduced as markets approach resolution.
 - Deterministic settlement: winning tokens redeem on-chain and losing tokens expire worthless.
+- Solana-native execution: Orbit's current design uses Meteora DLMM on Solana for high-frequency liquidity updates and low-fee trading.
 
 ## Documentation Principles
 

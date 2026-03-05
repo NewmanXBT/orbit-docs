@@ -9,6 +9,8 @@ Orbit is described as being built on two foundational components:
 - Meteora DLMM for concentrated AMM liquidity
 - A conditional token mechanism for minting YES and NO outcome tokens
 
+The current architecture is explicitly Solana + Meteora DLMM oriented. This dependency is intentional: time-aware liquidity updates and frequent rebalancing are operationally easier on high-throughput, low-fee execution environments.
+
 ## Conditional Token Mechanism
 
 Each market deploys a dedicated conditional token contract. Users deposit collateral to mint paired YES and NO tokens. At resolution:
@@ -61,6 +63,30 @@ That opening state is the protocol's main alternative to default-priced instant-
 
 The technical appendix ties liquidity decay to time remaining until expiry. The design goal is to spread LP risk across the market lifecycle instead of concentrating it near settlement.
 
+### Theoretical Basis
+
+Orbit's decay framing follows the pm-AMM literature (Moallemi & Robinson, 2024), which analyzes outcome-token AMMs under score-process assumptions and loss-versus-rebalancing (LVR) behavior.
+
+The pm-AMM framework distinguishes two useful design targets:
+
+- uniform instantaneous-LVR AMM behavior
+- constant expected LVR over remaining time behavior
+
+Orbit's `sqrt(T - t)` liquidity decay corresponds to the second target in design intent: stabilizing expected arbitrage loss per time interval as expiry approaches.
+
+### Practical Interpretation
+
+When uncertainty collapses near expiry, static liquidity can face disproportionate adverse selection. Decaying effective liquidity with `sqrt(T - t)` reduces this terminal concentration and better aligns exposure with residual uncertainty.
+
+### Assumptions and Failure Modes
+
+This justification is model-dependent. Performance can degrade when assumptions break, including:
+
+- highly non-Gaussian information arrival (sudden binary shocks)
+- correlated event clusters moving together
+- oracle delays that compress information into the final blocks
+- periods of thin liquidity where bin transitions become jumpy
+
 Operationally, the whitepaper describes:
 
 - scheduled LP withdrawals
@@ -76,3 +102,11 @@ Operationally, the whitepaper describes:
 ## Current Status
 
 This appendix reflects the current design direction from the Orbit whitepaper. Precise contract interfaces, oracle rules, and implementation details should be treated as subject to change until they are finalized in code and audits.
+
+### References
+
+- [Paradigm pm-AMM paper](https://www.paradigm.xyz/2024/11/pm-amm)
+- [pm-AMM summary](https://followin.io/en/feed/14195726)
+- [Market microstructure paper (arXiv)](https://arxiv.org/pdf/2510.15612.pdf)
+- [Meteora DLMM user docs](https://docs.meteora.ag/user-guide/guides/how-to-use-dlmm)
+- [Meteora DLMM SDK docs](https://docs.meteora.ag/developer-guide/guides/dlmm/typescript-sdk/sdk-functions)

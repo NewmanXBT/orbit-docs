@@ -43,6 +43,21 @@ Orbit is built around three ideas:
 
 Prediction markets have expanded rapidly across crypto-native and regulated venues. Orbit's thesis is that the next step is not just more markets, but better market structure for probability formation.
 
+Recent public reporting highlights the scale:
+
+- Polymarket 2025 volume around `$22B` (reported) with strong YoY growth
+- Kalshi 2025 volume around `$17.1B` (reported)
+- Cross-platform daily volume in early 2026 reported around `$701.7M` in peak periods
+
+These figures support the category-growth argument, but should be interpreted carefully. Independent research has argued that a meaningful share of activity on some venues may be wash-trading in certain periods. Orbit therefore treats gross volume as a directional signal, not a clean proxy for informational quality.
+
 ![Weekly prediction market volume](../assets/images/figure-1-market-volume.png)
 
 The whitepaper uses this volume chart to frame the growth of the category and the need for better market infrastructure.
+
+### Sources
+
+- [Dune Analytics chart source used in Figure 1](https://dune.com/)
+- [AInvest roundup](https://www.ainvest.com/news/polymarket-2026-volume-surge-flow-analysis-2602/)
+- [Gambling Insider 2026 statistics](https://www.gamblinginsider.com/in-depth/110180/prediction-market-statistics)
+- [Wash-trading estimate discussion](https://manifold.markets/)

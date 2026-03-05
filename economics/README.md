@@ -16,7 +16,9 @@ The whitepaper describes three primary fee destinations:
 
 ## Liquidity Providers
 
-LPs are compensated for making information-driven trading possible. Their returns come from fee generation over time, while their main risk is forecast error rather than a simple passive-yield profile.
+LPs are compensated for making information-driven trading possible. Their returns come from fee generation over time, but their downside is still directional in outcome terms.
+
+More precisely, LP risk is a softened form of directional exposure where loss magnitude depends on divergence between an LP's stated probability and the realized outcome. Time-aware decay can partially unwind exposure before expiry, but terminal losses remain possible under extreme divergence.
 
 The protocol's economic design aims to:
 

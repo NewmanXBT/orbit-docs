@@ -16,9 +16,19 @@ Orbit frames LP risk primarily as forecast error. If the probability assumptions
 
 Dynamic liquidity adjustment may reduce concentration risk, but it does not remove loss scenarios.
 
+LP risk should be interpreted as softened directional exposure, not risk-free market making.
+
+## Initialization Manipulation Risk
+
+A capital-weighted opening price can be gamed by well-capitalized participants who submit distorted initial beliefs and then trade against the induced opening state.
+
+Mitigation candidates include commit-reveal submissions, nonlinear weighting, and bounded/outlier contribution rules. Each mitigation introduces trade-offs in complexity, censorship risk, or capital efficiency.
+
 ## Oracle and Resolution Risk
 
 Final settlement depends on external reporting of real-world outcomes. Delays, ambiguities, or failures in oracle design can affect the timing or correctness of resolution.
+
+Orbit's current design direction is an optimistic-oracle-style challenge flow with proposer bonds and dispute windows. This reduces single-publisher trust but does not eliminate oracle-layer failure modes.
 
 ## Smart Contract Risk
 

@@ -19,6 +19,7 @@ pages=(
   "protocol/technical-appendix.md|technical-appendix.html|Technical Appendix"
   "economics/README.md|economics.html|Economics"
   "risks/README.md|risks.html|Risks"
+  "team-roadmap/README.md|team-roadmap.html|Team & Roadmap"
 )
 
 for page in "${pages[@]}"; do
@@ -132,6 +133,7 @@ wrap_page() {
     <a href="technical-appendix.html">Technical Appendix</a>
     <a href="economics.html">Economics</a>
     <a href="risks.html">Risks</a>
+    <a href="team-roadmap.html">Team & Roadmap</a>
   </nav>
   <main>
 EOF
@@ -149,5 +151,5 @@ EOF
 
 for html in "$OUT"/*.html; do
   wrap_page "$html"
-  perl -0pi -e 's#\.\./assets/images/#assets/images/#g; s#\./getting-started/README\.md#getting-started.html#g; s#\./concepts/README\.md#concepts.html#g; s#\./protocol/README\.md#protocol.html#g; s#\./protocol/market-lifecycle\.md#market-lifecycle.html#g; s#\./protocol/technical-appendix\.md#technical-appendix.html#g; s#\./economics/README\.md#economics.html#g; s#\./risks/README\.md#risks.html#g; s#\.\./concepts/README\.md#concepts.html#g; s#\.\./protocol/README\.md#protocol.html#g; s#\.\./protocol/market-lifecycle\.md#market-lifecycle.html#g; s#\.\./risks/README\.md#risks.html#g' "$html"
+  perl -0pi -e 's#\.\./assets/images/#assets/images/#g; s#\./getting-started/README\.md#getting-started.html#g; s#\./concepts/README\.md#concepts.html#g; s#\./protocol/README\.md#protocol.html#g; s#\./protocol/market-lifecycle\.md#market-lifecycle.html#g; s#\./protocol/technical-appendix\.md#technical-appendix.html#g; s#\./economics/README\.md#economics.html#g; s#\./risks/README\.md#risks.html#g; s#\./team-roadmap/README\.md#team-roadmap.html#g; s#\.\./concepts/README\.md#concepts.html#g; s#\.\./protocol/README\.md#protocol.html#g; s#\.\./protocol/market-lifecycle\.md#market-lifecycle.html#g; s#\.\./risks/README\.md#risks.html#g; s#\.\./team-roadmap/README\.md#team-roadmap.html#g' "$html"
 done
