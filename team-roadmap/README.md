@@ -4,14 +4,10 @@ This page turns Orbit from a pure concept narrative into an execution narrative.
 
 ## Team Snapshot
 
-Current working assumption for public disclosure format:
-
 - contributor count
 - protocol engineering background summary
 - smart contract and market design experience summary
 - operations/security ownership model
-
-This section should be updated with concrete numbers before broad external distribution.
 
 ## Security and Audit Plan
 
